@@ -5,7 +5,6 @@ def main(page: ft.Page):
 
     page.title = 'Teste'
     page.theme_mode = 'light'
-    page.update()
 
     def criar_tarefa(e):
         page.add(ft.Checkbox(label=caixa_texto.value))
