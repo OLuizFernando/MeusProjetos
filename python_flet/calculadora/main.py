@@ -53,13 +53,6 @@ class Calculadora(ft.UserControl):
             self.display.value = '0'
             self.reset()
 
-        # elif data in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']:
-        #     if self.display.value == '0' or self.nova_parte == True:
-        #         self.display.value = data
-        #         self.nova_parte = False
-        #     else:
-        #         self.display.value += data
-
         elif data in ['+', '-', '*', '/']:
             self.display.value = self.calcular(
                 self.parte1, float(self.display.value), self.operacao
