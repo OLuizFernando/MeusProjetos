@@ -5,6 +5,7 @@ class Calculadora(ft.UserControl):
 
     def build(self):
 
+        self.reset()
         self.display = ft.TextField(read_only=True, value='0', text_align=ft.TextAlign.RIGHT, height=70, width=330)
 
         return ft.Container(
@@ -33,53 +34,81 @@ class Calculadora(ft.UserControl):
                         ft.FilledTonalButton(text='1', height=100, width=100, data='1', on_click=self.click),
                         ft.FilledTonalButton(text='2', height=100, width=100, data='2', on_click=self.click),
                         ft.FilledTonalButton(text='3', height=100, width=100, data='3', on_click=self.click),
-                        ft.ElevatedButton(text='×', height=100, width=100, elevation=5, data='×', on_click=self.click)
+                        ft.ElevatedButton(text='×', height=100, width=100, elevation=5, data='*', on_click=self.click)
                     ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
 
                     ft.Row(controls=[
                         ft.FilledButton(text='C', height=100, width=100, data='C', on_click=self.click),
                         ft.FilledTonalButton(text='0', height=100, width=100, data='0', on_click=self.click),
                         ft.ElevatedButton(text='.', height=100, width=100, elevation=5, data='.', on_click=self.click),
-                        ft.ElevatedButton(text='÷', height=100, width=100, elevation=5, data='÷', on_click=self.click)
+                        ft.ElevatedButton(text='÷', height=100, width=100, elevation=5, data='/', on_click=self.click)
                     ], alignment=ft.MainAxisAlignment.SPACE_AROUND)
                 ]
             )
         )
 
     def click(self, e):
-        if e.control.data == 'C':
+        data = e.control.data
+        if data == 'C' or self.display.value == 'Erro':
             self.display.value = '0'
-            self.parte1 = self.parte2 = 0
+            self.reset()
 
-        elif e.control.data in ['+', '-', '×', '÷']:
-            self.operacao = e.control.data
-            try:
-                self.parte1 = int(self.display.value)
-            except ValueError:
+        # elif data in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']:
+        #     if self.display.value == '0' or self.nova_parte == True:
+        #         self.display.value = data
+        #         self.nova_parte = False
+        #     else:
+        #         self.display.value += data
+
+        elif data in ['+', '-', '*', '/']:
+            self.display.value = self.calcular(
+                self.parte1, float(self.display.value), self.operacao
+            )
+            self.operacao = data
+            if self.display.value == 'Erro':
+                self.parte1 = '0'
+            else:
                 self.parte1 = float(self.display.value)
-            self.display.value = '0'
+            self.nova_parte = True
 
-        elif self.display.value == '0':
-            self.display.value = e.control.data
-
-        elif e.control.data == '=':
-            try:
-                self.parte2 = int(self.display.value)
-            except ValueError:
-                self.parte2 = float(self.display.value)
-
-            if self.operacao == '+':
-                self.display.value = str(self.parte1 + self.parte2)
-            elif self.operacao == '-':
-                self.display.value = str(self.parte1 - self.parte2)
-            elif self.operacao == '×':
-                self.display.value = str(self.parte1 * self.parte2)
-            elif self.operacao == '÷':
-                self.display.value = str(self.parte1 / self.parte2)
+        elif data == '=':
+            self.display.value = self.calcular(
+                self.parte1, float(self.display.value), self.operacao
+            )
+            self.reset()
 
         else:
-            self.display.value += e.control.data
+            if self.display.value == '0' or self.nova_parte == True:
+                self.display.value = data
+                self.nova_parte = False
+            else:
+                self.display.value += data
+
         self.update()
+
+    def formatar(self, num):
+        try:
+            return int(num)
+        except ValueError:
+            return float(num)
+
+    def calcular(self, parte1, parte2, operacao):
+        if operacao == '+':
+            return self.formatar(parte1 + parte2)
+        elif operacao == '-':
+            return self.formatar(parte1 - parte2)
+        elif operacao == '*':
+            return self.formatar(parte1 * parte2)
+        elif operacao == '/':
+            if parte2 == 0:
+                return 'Erro'
+            else:
+                return self.formatar(parte1 / parte2)
+
+    def reset(self):
+        self.operacao = '+'
+        self.parte1 = 0
+        self.nova_parte = True
 
 
 def main(page: ft.Page):
