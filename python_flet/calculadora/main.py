@@ -49,7 +49,7 @@ class Calculadora(ft.UserControl):
     def click(self, e):
         if e.control.data == 'C':
             self.display.value = '0'
-            self.parte1 = self.parte2  = 0
+            self.parte1 = self.parte2 = 0
 
         elif e.control.data in ['+', '-', '×', '÷']:
             self.operacao = e.control.data
