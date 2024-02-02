@@ -6,7 +6,7 @@ class Calculadora(ft.UserControl):
     def build(self):
 
         self.reset()
-        self.display = ft.TextField(read_only=True, value='0', text_align=ft.TextAlign.RIGHT, height=70, width=330)
+        self.display = ft.TextField(read_only=True, value='0', text_align=ft.TextAlign.RIGHT, height=70, width=320)
 
         return ft.Container(
             content=ft.Column(
@@ -14,35 +14,35 @@ class Calculadora(ft.UserControl):
                     ft.Row(controls=[
                         self.display,
                         ft.FilledButton(text='=', height=100, width=100, data='=', on_click=self.click)
-                    ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                    ], alignment=ft.MainAxisAlignment.CENTER),
 
                     ft.Row(controls=[
                         ft.FilledTonalButton(text='7', height=100, width=100, data='7', on_click=self.click),
                         ft.FilledTonalButton(text='8', height=100, width=100, data='8', on_click=self.click),
                         ft.FilledTonalButton(text='9', height=100, width=100, data='9', on_click=self.click),
                         ft.ElevatedButton(text='+', height=100, width=100, elevation=5, data='+', on_click=self.click)
-                    ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                    ], alignment=ft.MainAxisAlignment.CENTER),
 
                     ft.Row(controls=[
                         ft.FilledTonalButton(text='4', height=100, width=100, data='4', on_click=self.click),
                         ft.FilledTonalButton(text='5', height=100, width=100, data='5', on_click=self.click),
                         ft.FilledTonalButton(text='6', height=100, width=100, data='6', on_click=self.click),
                         ft.ElevatedButton(text='-', height=100, width=100, elevation=5, data='-', on_click=self.click)
-                    ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                    ], alignment=ft.MainAxisAlignment.CENTER),
 
                     ft.Row(controls=[
                         ft.FilledTonalButton(text='1', height=100, width=100, data='1', on_click=self.click),
                         ft.FilledTonalButton(text='2', height=100, width=100, data='2', on_click=self.click),
                         ft.FilledTonalButton(text='3', height=100, width=100, data='3', on_click=self.click),
                         ft.ElevatedButton(text='×', height=100, width=100, elevation=5, data='*', on_click=self.click)
-                    ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                    ], alignment=ft.MainAxisAlignment.CENTER),
 
                     ft.Row(controls=[
                         ft.FilledButton(text='C', height=100, width=100, data='C', on_click=self.click),
                         ft.FilledTonalButton(text='0', height=100, width=100, data='0', on_click=self.click),
                         ft.ElevatedButton(text='.', height=100, width=100, elevation=5, data='.', on_click=self.click),
                         ft.ElevatedButton(text='÷', height=100, width=100, elevation=5, data='/', on_click=self.click)
-                    ], alignment=ft.MainAxisAlignment.SPACE_AROUND)
+                    ], alignment=ft.MainAxisAlignment.CENTER)
                 ]
             )
         )
