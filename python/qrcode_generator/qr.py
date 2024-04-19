@@ -5,9 +5,9 @@ from PIL import Image
 
 def generate():
     qr = qrcode.make(url.get())
-    qr.save("qrcode.png", "PNG")
+    qr.save("python/qrcode_generator/qrcode_image/qrcode.png", "PNG")
 
-    img = Image.open("qrcode.png")
+    img = Image.open("python/qrcode_generator/qrcode_image/qrcode.png")
     img.show()
 
     url.delete(0, END)
