@@ -1,2 +1,2 @@
-# MeusProjetos
- Pequenos exercícios e projetos pessoais
+# My Projects
+ Very simple exercises and personal projects ideas
